@@ -14,6 +14,7 @@ public:
 	void appendChild(BrickModel *child);
 
 	BrickModel *child(int row);
+	const QList<BrickModel*> & children();
 	int childCount() const;
 	int columnCount() const;
 	int row() const;

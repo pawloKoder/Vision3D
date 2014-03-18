@@ -1,5 +1,7 @@
 #include "trajectoryrenderer.h"
 
+#include <QDebug>
+
 TrajectoryRenderer::TrajectoryRenderer()
 {
 	color = new ColorNode(this);
@@ -17,4 +19,9 @@ QString TrajectoryRenderer::getName() const
 QString TrajectoryRenderer::getDesc() const
 {
 	return "Trajectory renderer";
+}
+
+void TrajectoryRenderer::paint()
+{
+	qDebug() << "Paint" << this;
 }

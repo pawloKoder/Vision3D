@@ -8,12 +8,14 @@ class Renderer : public BrickModel
 {
 
 public:
-    Renderer(BrickModel * parent = 0);
+	Renderer(BrickModel * parent = 0);
 	virtual ~Renderer();
 	virtual QString getName() const;
 	virtual QString getDesc() const;
 
 	virtual QVariant data(int column) const;
+
+	virtual void paint() = 0;
 
 private:
 	PathNode * path;

@@ -71,7 +71,12 @@ QVariant BrickModel::decorationData(int /*column*/) const
 	return QVariant();
 }
 
-BrickModel *BrickModel::parent()
+BrickModel * BrickModel::parent()
 {
-    return parentItem;
+	return parentItem;
+}
+
+const QList<BrickModel*> & BrickModel::children()
+{
+	return childItems;
 }

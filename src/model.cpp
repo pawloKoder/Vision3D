@@ -140,5 +140,10 @@ QVariant Model::headerData(int section, Qt::Orientation orientation,
 
 void Model::paintAll()
 {
-
+	foreach(BrickModel * bm, self().rootItem->children())
+	{
+		Renderer * rnd = reinterpret_cast<Renderer*>(bm);
+		if(rnd)
+			rnd->paint();
+	}
 }

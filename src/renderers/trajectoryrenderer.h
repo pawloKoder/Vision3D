@@ -13,6 +13,8 @@ public:
 
 	virtual QString getName() const;
 	virtual QString getDesc() const;
+
+	virtual void paint();
 };
 
 #endif // TRAJECTORYRENDERER_H

@@ -101,6 +101,8 @@ QVariant Model::data(const QModelIndex &index, int role) const
 		return item->data(index.column());
 	case Qt::DecorationRole :
 		return item->decorationData(index.column());
+	case Qt::EditRole :
+		return item->editData(index.column());
 	default :
 		return QVariant();
 	}

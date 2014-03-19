@@ -22,7 +22,6 @@ SOURCES += src/main.cpp\
     src/delegates/colorlistdelegate.cpp \
     src/renderers/trajectoryrenderer.cpp \
     src/renderers/brickmodel.cpp \
-	src/renderers/nodes/pathnode.cpp \
     src/delegates/basedelegate.cpp \
     src/base/filepath.cpp \
     src/delegates/spinboxdelegate.cpp \
@@ -32,7 +31,10 @@ SOURCES += src/main.cpp\
     src/delegates/proxydelegate.cpp \
     src/widget/plotarea.cpp \
     src/widget/view/viewdata.cpp \
-	src/viewsettings.cpp
+	src/viewsettings.cpp \
+    src/renderers/help/xyzloader.cpp \
+    src/renderers/nodes/node.cpp \
+    src/delegates/doublespinboxdelegate.cpp
 
 HEADERS  += src/mainwindow.h \
     src/leftmenu.h \
@@ -43,7 +45,6 @@ HEADERS  += src/mainwindow.h \
     src/delegates/colorlistdelegate.h \
     src/renderers/trajectoryrenderer.h \
     src/renderers/brickmodel.h \
-	src/renderers/nodes/pathnode.h \
     src/delegates/basedelegate.h \
     src/base/filepath.h \
     src/delegates/spinboxdelegate.h \
@@ -53,7 +54,11 @@ HEADERS  += src/mainwindow.h \
     src/delegates/proxydelegate.h \
     src/widget/plotarea.h \
     src/widget/view/viewdata.h \
-	src/viewsettings.h
+	src/viewsettings.h \
+    src/renderers/help/xyzloader.h \
+    src/base/strings.h \
+    src/renderers/nodes/node.h \
+    src/delegates/doublespinboxdelegate.h
 
 RESOURCES += \
     rsc/icons.qrc

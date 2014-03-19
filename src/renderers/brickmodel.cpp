@@ -57,6 +57,11 @@ QVariant BrickModel::data(int column) const
 	return itemData.value(column);
 }
 
+QVariant BrickModel::editData(int column) const
+{
+	return itemData.value(column);
+}
+
 bool BrickModel::setData(int column, QVariant value)
 {
 	if(itemData.size() <= column)

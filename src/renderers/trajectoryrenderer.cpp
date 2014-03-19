@@ -1,10 +1,13 @@
 #include "trajectoryrenderer.h"
 
 #include <QDebug>
+#include <QVector3D>
+#include <GL/glu.h>
 
 TrajectoryRenderer::TrajectoryRenderer()
 {
-	color = new ColorNode(this);
+	color = new ColorNode(this, Qt::black, "Color of lines");
+	level = new Node<double>(this, 0.1, "Max length of line");
 }
 
 TrajectoryRenderer::~TrajectoryRenderer()
@@ -23,5 +26,28 @@ QString TrajectoryRenderer::getDesc() const
 
 void TrajectoryRenderer::paint()
 {
-	qDebug() << "Paint" << this;
+	updateSettings();
+
+	glBegin(GL_LINES);
+	QVector3D prev;
+	foreach(auto current, data.vertices)
+	{
+		if((prev - current).length() > level->getValue())
+		{
+			glEnd();
+			glBegin(GL_LINES);
+		}
+		glVertex3f(current.x(), current.y(), current.z());
+		prev = current;
+	}
+	glEnd();
+}
+
+void TrajectoryRenderer::updateSettings()
+{
+	if(cachePath != path->getValue())
+	{
+		cachePath = path->getValue();
+		data = XYZloader(cachePath);
+	}
 }

@@ -2,10 +2,9 @@
 #define BASEDELEGATE_H
 
 #include <QVariant>
-#include <QPainter>
-#include <QStyleOptionViewItem>
+#include <QItemDelegate>
 
-class BaseDelegate
+class BaseDelegate : public QItemDelegate
 {
 public:
 	BaseDelegate();
@@ -19,6 +18,8 @@ public:
 		const QModelIndex &index) const = 0;
 	virtual void updateEditorGeometry(QWidget *editor,
 		const QStyleOptionViewItem &option, const QModelIndex & index ) const;
+	virtual void paint(QPainter *painter, const QStyleOptionViewItem &option,
+		const QModelIndex &index) const;
 };
 
 #endif // BASEDELEGATE_H

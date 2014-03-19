@@ -3,16 +3,13 @@
 
 #include <QColor>
 
-#include "../brickmodel.h"
+#include "node.h"
 
-class ColorNode : public BrickModel
+class ColorNode : public Node<QColor>
 {
 public:
 	ColorNode(BrickModel* parent, QColor value = QColor(), QString description = "Color");
 	virtual ~ColorNode();
-
-	void setColor(QColor);
-	QColor color() const;
 
 	virtual QVariant decorationData(int column) const;
 };

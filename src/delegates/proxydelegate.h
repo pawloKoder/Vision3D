@@ -10,19 +10,23 @@ class ProxyDelegate : public QItemDelegate
 	Q_OBJECT
 
 public:
-	ProxyDelegate(QWidget *parent = 0);
+	ProxyDelegate(QWidget *parent = nullptr);
 
 	void registerDelegate(BaseDelegate*);
 
-	QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
+	virtual QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
 		const QModelIndex &index) const;
-	void setEditorData(QWidget *editor, const QModelIndex &index) const;
-	void setModelData(QWidget *editor, QAbstractItemModel *model,
+	virtual void setEditorData(QWidget *editor, const QModelIndex &index) const;
+	virtual void setModelData(QWidget *editor, QAbstractItemModel *model,
 		const QModelIndex &index) const;
-	void updateEditorGeometry(QWidget *editor,
-		const QStyleOptionViewItem &option, const QModelIndex & index ) const;
+	virtual void updateEditorGeometry(QWidget *editor,
+		const QStyleOptionViewItem &option, const QModelIndex &index) const;
+	virtual void paint(QPainter *painter, const QStyleOptionViewItem &option,
+		const QModelIndex &index) const;
 
 private:
 	QList<BaseDelegate*> delegates;
+
+	BaseDelegate * getDelegate(const QModelIndex &) const;
 };
 #endif // DELEGATE_H

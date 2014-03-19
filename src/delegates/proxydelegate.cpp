@@ -17,9 +17,10 @@ QWidget *ProxyDelegate::createEditor(QWidget *parent,
 	const QStyleOptionViewItem &option,
 	const QModelIndex &index) const
 {
-	foreach(BaseDelegate * delegete, delegates)
-		if(delegete->canConvert(index.data()))
-			return delegete->createEditor(parent, option, index);
+	BaseDelegate * delegete = getDelegate(index);
+
+	if(delegete)
+		return delegete->createEditor(parent, option, index);
 
 	return QItemDelegate::createEditor(parent, option, index);
 }
@@ -27,36 +28,52 @@ QWidget *ProxyDelegate::createEditor(QWidget *parent,
 void ProxyDelegate::setEditorData(QWidget *editor,
 	const QModelIndex &index) const
 {
-	foreach(BaseDelegate * delegete, delegates)
-		if(delegete->canConvert(index.data())) {
-			delegete->setEditorData(editor, index);
-			return;
-		}
+	BaseDelegate * delegete = getDelegate(index);
 
-	QItemDelegate::setEditorData(editor, index);
+	if(delegete)
+		delegete->setEditorData(editor, index);
+	else
+		QItemDelegate::setEditorData(editor, index);
 }
 
 void ProxyDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
 	const QModelIndex &index) const
 {
-	foreach(BaseDelegate * delegete, delegates)
-		if(delegete->canConvert(index.data())) {
-			delegete->setModelData(editor, model, index);
-			return;
-		}
+	BaseDelegate * delegete = getDelegate(index);
 
-	QItemDelegate::setModelData(editor, model, index);
+	if(delegete)
+		delegete->setModelData(editor, model, index);
+	else
+		QItemDelegate::setModelData(editor, model, index);
 }
 
 
 void ProxyDelegate::updateEditorGeometry(QWidget *editor,
-	const QStyleOptionViewItem &option, const QModelIndex & index ) const
+	const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+	BaseDelegate * delegete = getDelegate(index);
+
+	if(delegete)
+		delegete->updateEditorGeometry(editor, option, index);
+	else
+		QItemDelegate::updateEditorGeometry(editor, option, index);
+}
+
+void ProxyDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
+	const QModelIndex &index) const
+{
+	BaseDelegate * delegete = getDelegate(index);
+
+	if(delegete)
+		delegete->paint(painter, option, index);
+	else
+		QItemDelegate::paint(painter, option, index);
+}
+
+BaseDelegate * ProxyDelegate::getDelegate(const QModelIndex &index) const
 {
 	foreach(BaseDelegate * delegete, delegates)
-		if(delegete->canConvert(index.data())) {
-			delegete->updateEditorGeometry(editor, option, index);
-			return;
-		}
-
-	QItemDelegate::updateEditorGeometry(editor, option, index);
+		if(delegete->canConvert(index.data(Qt::EditRole)))
+			return delegete;
+	return nullptr;
 }

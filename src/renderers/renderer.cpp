@@ -8,7 +8,7 @@ Renderer::Renderer(BrickModel * parent) :
 	itemData.append("Test");
 	itemData.append("LOl");
 
-	path = new PathNode(this, "", "Data path");
+	path = new Node<FilePath>(this, FilePath(""), "Data path");
 }
 
 Renderer::~Renderer()

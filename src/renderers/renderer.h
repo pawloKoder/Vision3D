@@ -2,7 +2,8 @@
 #define RENDERER_H
 
 #include "brickmodel.h"
-#include "nodes/pathnode.h"
+#include "nodes/node.h"
+#include "../base/filepath.h"
 
 class Renderer : public BrickModel
 {
@@ -17,8 +18,8 @@ public:
 
 	virtual void paint() = 0;
 
-private:
-	PathNode * path;
+protected:
+	Node<FilePath> * path;
 };
 
 #endif // RENDERER_H

@@ -36,15 +36,5 @@ void SpinBoxDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
 {
 	QSpinBox *spinBox = static_cast<QSpinBox*>(editor);
 	spinBox->interpretText();
-	int value = spinBox->value();
-
-	model->setData(index, value, Qt::EditRole);
+	model->setData(index, spinBox->value(), Qt::EditRole);
 }
-
-void SpinBoxDelegate::updateEditorGeometry(QWidget *editor,
-	const QStyleOptionViewItem &option, const QModelIndex &/* index */) const
-{
-	editor->setGeometry(option.rect);
-}
-
-

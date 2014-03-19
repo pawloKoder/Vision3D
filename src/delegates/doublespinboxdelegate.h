@@ -1,12 +1,12 @@
-#ifndef SPINBOXDELEGATE_H
-#define SPINBOXDELEGATE_H
+#ifndef DOUBLESPINBOXDELEGATE_H
+#define DOUBLESPINBOXDELEGATE_H
 
 #include "basedelegate.h"
 
-class SpinBoxDelegate : public BaseDelegate
+class DoubleSpinBoxDelegate : public BaseDelegate
 {
 public:
-	SpinBoxDelegate();
+	DoubleSpinBoxDelegate();
 
 	virtual bool canConvert(const QVariant &);
 
@@ -17,4 +17,4 @@ public:
 		const QModelIndex &index) const;
 };
 
-#endif // SPINBOXDELEGATE_H
+#endif // DOUBLESPINBOXDELEGATE_H

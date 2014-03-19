@@ -20,6 +20,7 @@ public:
 	int row() const;
 
 	virtual QVariant data(int column) const;
+	virtual QVariant editData(int column) const;
 	virtual QVariant decorationData(int column) const;
 	virtual bool setData(int column, QVariant value);
 

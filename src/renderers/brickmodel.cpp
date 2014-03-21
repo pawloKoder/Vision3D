@@ -3,29 +3,29 @@
 #include <QDebug>
 
 BrickModel::BrickModel(const QList<QVariant> &data, BrickModel *parent) :
-    BrickModel(parent)
+	BrickModel(parent)
 {
-    itemData = data;
+	itemData = data;
 }
 
 BrickModel::BrickModel(BrickModel *parent)
 {
-    parentItem = parent;
+	parentItem = parent;
 }
 
 BrickModel::~BrickModel()
 {
-    qDeleteAll(childItems);
+	qDeleteAll(childItems);
 }
 
-void BrickModel::setParent(BrickModel * brick)
+void BrickModel::setParent(BrickModel *brick)
 {
 	parentItem = brick;
 }
 
 void BrickModel::appendChild(BrickModel *item)
 {
-    childItems.append(item);
+	childItems.append(item);
 	item->setParent(this);
 }
 
@@ -41,15 +41,15 @@ int BrickModel::childCount() const
 
 int BrickModel::row() const
 {
-    if (parentItem)
-        return parentItem->childItems.indexOf(const_cast<BrickModel*>(this));
+	if (parentItem)
+		return parentItem->childItems.indexOf(const_cast<BrickModel*>(this));
 
-    return 0;
+	return 0;
 }
 
 int BrickModel::columnCount() const
 {
-    return itemData.count();
+	return itemData.count();
 }
 
 QVariant BrickModel::data(int column) const

@@ -19,6 +19,9 @@ public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
 
+signals:
+	void refreshSignal();
+
 private slots:
 	void createNewTrajectorySlot();
 	void createNewIsosurfaceSlot();

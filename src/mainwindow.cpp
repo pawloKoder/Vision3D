@@ -10,15 +10,18 @@
 #include "base/strings.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent)
+	QMainWindow(parent)
 {
 	createToolBar();
 
 	QSplitter *splitter = new QSplitter(Qt::Horizontal, this);
 	leftMenu = new LeftMenu();
 	splitter->addWidget(leftMenu);
-	splitter->addWidget(new PlotArea());
+	PlotArea * area = new PlotArea();
+	splitter->addWidget(area);
 	setCentralWidget(splitter);
+
+	connect(this, SIGNAL(refreshSignal()), area, SLOT(repaint()));
 }
 
 MainWindow::~MainWindow()
@@ -37,6 +40,9 @@ void MainWindow::createToolBar()
 	tool->addSeparator();
 	tool->addAction(QIcon(":/icons/projection.png"), Strings::ToggleProjection,
 		this, SLOT(toggleProjectionSlot()));
+	tool->addSeparator();
+	tool->addAction(QIcon(":/icons/refresh.png"), Strings::Refresh,
+		this, SIGNAL(refreshSignal()));
 
 	addToolBar(tool);
 }

@@ -9,6 +9,7 @@ namespace Strings {
 	const QString NewMIP = QObject::tr("New MIP view.");
 
 	const QString ToggleProjection = QObject::tr("Toogle Projection.");
+	const QString Refresh = QObject::tr("Refresh.");
 }
 
 #endif // STRINGS_H

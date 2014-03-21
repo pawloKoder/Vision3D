@@ -21,6 +21,7 @@ private:
 	XYZVloader data;
 
 	void updateSettings();
+	void setColor(float ratio);
 };
 
 #endif // MIPRENDERER_H

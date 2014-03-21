@@ -47,3 +47,8 @@ void XYZVloader::reload()
 		}
 	}
 }
+
+void XYZVloader::sortByValues()
+{
+	qSort(vertices.begin(), vertices.end(), Less());
+}

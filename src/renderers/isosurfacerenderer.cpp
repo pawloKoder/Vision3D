@@ -25,6 +25,7 @@ QString IsosurfaceRenderer::getDesc() const
 
 void IsosurfaceRenderer::paintImpl()
 {
+	glDisable(GL_DEPTH_TEST);
 	updateSettings();
 
 	glBegin(GL_LINES);

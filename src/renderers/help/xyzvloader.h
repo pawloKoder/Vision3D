@@ -8,6 +8,15 @@
 
 class XYZVloader
 {
+	struct Less
+	{
+		bool operator()(const QPair<QVector3D, double> & a,
+			const QPair<QVector3D, double> & b) const
+		{
+			return a.second < b.second;
+		}
+	};
+
 public:
 	float min[4];
 	float max[4];
@@ -15,6 +24,7 @@ public:
 
 	explicit XYZVloader(QString = QString());
 	void reload();
+	void sortByValues();
 
 private:
 	QString path;

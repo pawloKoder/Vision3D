@@ -6,7 +6,7 @@
 
 MIPrenderer::MIPrenderer()
 {
-
+	size = new Node<double>(this, 0.1, "Radius of shpere");
 }
 
 MIPrenderer::~MIPrenderer()
@@ -30,11 +30,7 @@ void MIPrenderer::paintImpl()
 
 	GLUquadricObj *quadric;
 	quadric = gluNewQuadric();
-
 	glPushMatrix();
-	/*glTranslatef(-(data.min[0]+data.max[0])/2,
-				 -(data.min[1]+data.max[1])/2,
-				 -(data.min[2]+data.max[2])/2);*/
 
 	foreach(auto it, data.vertices)
 	{
@@ -44,7 +40,7 @@ void MIPrenderer::paintImpl()
 		setColor((it.second - data.min[3]) / (data.max[3] - data.min[3]));
 
 		gluQuadricDrawStyle(quadric, GLU_FILL);
-		gluSphere(quadric, .1, 18, 9);
+		gluSphere(quadric, size->getValue(), 18, 9);
 
 		glPopMatrix();
 	}

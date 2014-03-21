@@ -48,8 +48,8 @@ void PlotArea::resizeGL(int w, int h)
 	if (view.projection)
 		gluPerspective(35.0, ratio, 0.1f, 1000.0f);
 	else
-		glOrtho(-view.zoom, view.zoom, -view.zoom / ratio,
-			view.zoom / ratio, -10.0f, 10.0f);
+		glOrtho(-10.0*view.zoom, 10.0*view.zoom, -10.0*view.zoom / ratio,
+			10.0*view.zoom / ratio, -100.0, 100.0);
 
 	paintGL();
 }
@@ -67,7 +67,7 @@ void PlotArea::paintGL()
 	GLUquadricObj *quadric;
 	quadric = gluNewQuadric();
 	gluQuadricDrawStyle(quadric, GLU_LINE );
-	gluSphere( quadric ,  50.0*(0.01+view.zoom) , 18 , 9 );
+	gluSphere( quadric ,  10 , 18 , 9 );
 }
 
 void PlotArea::clear()
@@ -88,7 +88,8 @@ void PlotArea::computeView()
 	position = QVector3D(cos(alpha)*sin(beta),sin(alpha),cos(alpha)*cos(beta));
 	direction = - position;
 	float mode = 100.0*(0.01+view.zoom);
-	position *= mode;
+	if (view.projection)
+		position *= mode;
 
 	up = QVector3D(sin(alpha)*sin(beta),-cos(alpha),sin(alpha)*cos(beta));
 

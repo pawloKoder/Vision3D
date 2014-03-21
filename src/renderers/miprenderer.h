@@ -3,6 +3,7 @@
 
 #include "renderer.h"
 #include "help/xyzvloader.h"
+#include "nodes/node.h"
 
 class MIPrenderer : public Renderer
 {
@@ -19,6 +20,7 @@ private:
 private:
 	QString cachePath;
 	XYZVloader data;
+	Node<double> * size;
 
 	void updateSettings();
 	void setColor(float ratio);

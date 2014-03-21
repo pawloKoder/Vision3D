@@ -8,9 +8,10 @@ class ViewSettings : public QObject
 {
 	Q_OBJECT
 
-	ViewData data;
-
 	ViewSettings();
+	ViewSettings(const ViewSettings &) = delete;
+	ViewSettings& operator=(const ViewSettings&) = delete;
+	~ViewSettings();
 
 public:
 	static ViewSettings & self();
@@ -32,6 +33,9 @@ public slots:
 	void wheelDelta(int);
 
 	void setZoom(int);
+
+private:
+	ViewData data;
 };
 
 #endif // VIEWSETTINGS_H

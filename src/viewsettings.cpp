@@ -6,6 +6,10 @@ ViewSettings::ViewSettings()
 {
 }
 
+ViewSettings::~ViewSettings()
+{
+}
+
 ViewSettings & ViewSettings::self()
 {
 	static ViewSettings instance;
@@ -14,32 +18,32 @@ ViewSettings & ViewSettings::self()
 
 void ViewSettings::setRotationX(int param)
 {
-	data.rotation[0] = 0.01*param;
+	data.rotation[0] = 0.01 * param;
 	emit setViewData(data);
 }
 
 void ViewSettings::setRotationY(int param)
 {
-	data.rotation[1] = 0.01*param;
+	data.rotation[1] = 0.01 * param;
 	emit setViewData(data);
 }
 
 void ViewSettings::setRotationZ(int param)
 {
-	data.rotation[2] = 0.01*param;
+	data.rotation[2] = 0.01 * param;
 	emit setViewData(data);
 }
 
 void ViewSettings::setZoom(int param)
 {
-	data.zoom = 0.01*param;
+	data.zoom = 0.01 * param;
 	emit setViewData(data);
 }
 
 void ViewSettings::mouseMove(QPoint param)
 {
-	data.rotation[0] += -0.001*param.y();
-	data.rotation[1] += 0.001*param.x();
+	data.rotation[0] += -0.001 * param.y();
+	data.rotation[1] += 0.001 * param.x();
 	emit setViewData(data);
 }
 

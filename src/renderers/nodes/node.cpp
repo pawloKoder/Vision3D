@@ -1,5 +1,3 @@
-#include "node.h"
-
 #include<QVariant>
 
 template<class T>
@@ -15,6 +13,12 @@ template<class T>
 Node<T>::~Node()
 {
 
+}
+
+template<class T>
+QVariant Node<T>::data(int column) const
+{
+	return itemData.value(column);
 }
 
 template<class T>

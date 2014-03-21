@@ -17,6 +17,9 @@ public:
 
 	static ViewData getViewData();
 
+	static bool projection();
+	static void toggleProjection();
+
 signals:
 	void setViewData(ViewData);
 

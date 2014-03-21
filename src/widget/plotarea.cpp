@@ -33,6 +33,8 @@ void PlotArea::initializeGL()
 
 void PlotArea::resizeGL(int w, int h)
 {
+	view = ViewSettings::getViewData();
+
 	glMatrixMode(GL_PROJECTION);
 
 	glLoadIdentity();
@@ -43,7 +45,11 @@ void PlotArea::resizeGL(int w, int h)
 
 	float ratio = Sx/Sy;
 
-	gluPerspective(35.0,ratio,0.1f,1000.0f);
+	if (view.projection)
+		gluPerspective(35.0, ratio, 0.1f, 1000.0f);
+	else
+		glOrtho(-view.zoom, view.zoom, -view.zoom / ratio,
+			view.zoom / ratio, -10.0f, 10.0f);
 
 	paintGL();
 }

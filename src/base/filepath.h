@@ -4,6 +4,8 @@
 #include <QString>
 #include <QVariant>
 
+#include "../renderers/nodes/node.h"
+
 class FilePath
 {
 public:
@@ -12,7 +14,6 @@ public:
 	QString getString() const;
 	void set(QString);
 
-	operator QString() const;
 private:
 	QString path;
 };

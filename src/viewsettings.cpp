@@ -1,5 +1,7 @@
 #include "viewsettings.h"
 
+#include <QDebug>
+
 ViewSettings::ViewSettings()
 {
 }
@@ -43,11 +45,21 @@ void ViewSettings::mouseMove(QPoint param)
 
 void ViewSettings::wheelDelta(int delta)
 {
-	data.zoom = qMin(1.0,qMax(0.0,data.zoom+0.0001*delta));
+	data.zoom = qMin(10.0, qMax(0.0, data.zoom + 0.0001*delta));
 	emit setViewData(data);
 }
 
 ViewData ViewSettings::getViewData()
 {
 	return self().data;
+}
+
+bool ViewSettings::projection()
+{
+	return self().data.projection;
+}
+
+void ViewSettings::toggleProjection()
+{
+	self().data.projection = !self().data.projection;
 }

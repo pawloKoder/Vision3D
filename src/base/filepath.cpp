@@ -15,9 +15,3 @@ void FilePath::set(QString p)
 {
 	path = p;
 }
-
-FilePath::operator QString() const
-{
-	return "LOL";
-	return getString();
-}

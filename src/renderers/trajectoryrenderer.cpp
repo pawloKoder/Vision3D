@@ -24,9 +24,12 @@ QString TrajectoryRenderer::getDesc() const
 	return "Trajectory renderer";
 }
 
-void TrajectoryRenderer::paint()
+void TrajectoryRenderer::paintImpl()
 {
 	updateSettings();
+
+	glColor3f(color->getValue().redF(), color->getValue().greenF(),
+		color->getValue().blueF());
 
 	glBegin(GL_LINES);
 	QVector3D prev;
@@ -45,9 +48,9 @@ void TrajectoryRenderer::paint()
 
 void TrajectoryRenderer::updateSettings()
 {
-	if(cachePath != path->getValue())
+	if(cachePath != path->getValue().getString())
 	{
-		cachePath = path->getValue();
+		cachePath = path->getValue().getString();
 		data = XYZloader(cachePath);
 	}
 }

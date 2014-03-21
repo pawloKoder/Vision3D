@@ -20,7 +20,10 @@ public:
 	~MainWindow();
 
 private slots:
-	void createNewViewSlot();
+	void createNewTrajectorySlot();
+	void createNewIsosurfaceSlot();
+	void createNewMIPSlot();
+	void toggleProjectionSlot();
 
 private:
 

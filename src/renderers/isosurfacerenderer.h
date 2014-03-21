@@ -1,18 +1,17 @@
-#ifndef TRAJECTORYRENDERER_H
-#define TRAJECTORYRENDERER_H
+#ifndef ISOSURFACERENDERER_H
+#define ISOSURFACERENDERER_H
 
 #include "renderer.h"
-#include "help/xyzloader.h"
+#include "help/xyzvloader.h"
 #include "nodes/colornode.h"
 #include "nodes/node.h"
 
-class TrajectoryRenderer : public Renderer
+class IsosurfaceRenderer : public Renderer
 {
-	ColorNode * color;
 	Node<double> * level;
 public:
-	TrajectoryRenderer();
-	virtual ~TrajectoryRenderer();
+	IsosurfaceRenderer();
+	virtual ~IsosurfaceRenderer();
 
 	virtual QString getName() const;
 	virtual QString getDesc() const;
@@ -22,9 +21,9 @@ protected:
 
 private:
 	QString cachePath;
-	XYZloader data;
+	XYZVloader data;
 
 	void updateSettings();
 };
 
-#endif // TRAJECTORYRENDERER_H
+#endif // ISOSURFACERENDERER_H

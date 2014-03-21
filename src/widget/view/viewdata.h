@@ -9,6 +9,8 @@ public:
 	float rotation[3];
 	float zoom;
 
+	bool projection;
+
 	ViewData();
 };
 

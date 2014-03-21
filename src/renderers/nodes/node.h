@@ -10,6 +10,8 @@ public:
 	Node(BrickModel* parent, T value = T(), QString description = QString());
 	virtual ~Node();
 
+	virtual QVariant data(int column) const;
+
 	void setValue(T);
 	T getValue() const;
 };

@@ -8,7 +8,8 @@ Renderer::Renderer(BrickModel * parent) :
 	itemData.append("Test");
 	itemData.append("LOl");
 
-	path = new Node<FilePath>(this, FilePath(""), "Data path");
+	path = new FilePathNode(this, FilePath(""), "Data path");
+	print = new Node<bool>(this, true, "Enable/Disable painting");
 }
 
 Renderer::~Renderer()
@@ -27,6 +28,12 @@ QVariant Renderer::data(int column) const
 		default:
 			return BrickModel::data(column);
 	}
+}
+
+void Renderer::paint()
+{
+	if(print->getValue())
+		paintImpl();
 }
 
 QString Renderer::getName() const

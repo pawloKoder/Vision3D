@@ -34,7 +34,11 @@ SOURCES += src/main.cpp\
 	src/viewsettings.cpp \
     src/renderers/help/xyzloader.cpp \
     src/renderers/nodes/node.cpp \
-    src/delegates/doublespinboxdelegate.cpp
+    src/delegates/doublespinboxdelegate.cpp \
+    src/renderers/nodes/filepathnode.cpp \
+    src/renderers/isosurfacerenderer.cpp \
+    src/renderers/miprenderer.cpp \
+    src/renderers/help/xyzvloader.cpp
 
 HEADERS  += src/mainwindow.h \
     src/leftmenu.h \
@@ -58,7 +62,11 @@ HEADERS  += src/mainwindow.h \
     src/renderers/help/xyzloader.h \
     src/base/strings.h \
     src/renderers/nodes/node.h \
-    src/delegates/doublespinboxdelegate.h
+    src/delegates/doublespinboxdelegate.h \
+    src/renderers/nodes/filepathnode.h \
+    src/renderers/isosurfacerenderer.h \
+    src/renderers/miprenderer.h \
+    src/renderers/help/xyzvloader.h
 
 RESOURCES += \
     rsc/icons.qrc

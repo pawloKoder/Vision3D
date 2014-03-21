@@ -38,7 +38,8 @@ SOURCES += src/main.cpp\
     src/renderers/nodes/filepathnode.cpp \
     src/renderers/isosurfacerenderer.cpp \
     src/renderers/miprenderer.cpp \
-    src/renderers/help/xyzvloader.cpp
+    src/renderers/help/xyzvloader.cpp \
+    src/delegates/checkboxdelegate.cpp
 
 HEADERS  += src/mainwindow.h \
     src/leftmenu.h \
@@ -66,7 +67,8 @@ HEADERS  += src/mainwindow.h \
     src/renderers/nodes/filepathnode.h \
     src/renderers/isosurfacerenderer.h \
     src/renderers/miprenderer.h \
-    src/renderers/help/xyzvloader.h
+    src/renderers/help/xyzvloader.h \
+    src/delegates/checkboxdelegate.h
 
 RESOURCES += \
     rsc/icons.qrc

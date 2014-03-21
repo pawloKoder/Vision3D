@@ -7,12 +7,14 @@
 #include "delegates/pathdelegate.h"
 #include "delegates/colorlistdelegate.h"
 #include "delegates/doublespinboxdelegate.h"
+#include "delegates/checkboxdelegate.h"
 
 LeftMenu::LeftMenu(QWidget *parent) :
 	QTreeView(parent)
 {
 	setModel(&Model::self());
 	ProxyDelegate * delegate = new ProxyDelegate();
+	delegate->registerDelegate(new CheckBoxDelegate());
 	delegate->registerDelegate(new DoubleSpinBoxDelegate());
 	delegate->registerDelegate(new SpinBoxDelegate());
 	delegate->registerDelegate(new PathDelegate());

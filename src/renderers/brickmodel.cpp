@@ -68,6 +68,10 @@ bool BrickModel::setData(int column, QVariant value)
 		return false;
 
 	itemData[column] = value;
+
+	if(parent() != nullptr)
+		parent()->childChanged();
+
 	return true;
 }
 

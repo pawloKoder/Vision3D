@@ -4,6 +4,7 @@
 #include "renderer.h"
 #include "help/xyzvloader.h"
 #include "help/rainbow.h"
+#include "help/basicinterpolator.h"
 #include "nodes/colornode.h"
 #include "nodes/node.h"
 
@@ -34,11 +35,12 @@ protected:
 	virtual void paintImpl();
 
 private:
-	double elementSize;
 	double begin[3];
 	int numOfElements[3];
 	int numOfNodes;
 	Rainbow rainbow;
+	bool changed;
+	BasicInterpolator interpolator;
 	std::vector<Triangle> triangles;
 
 	QString cachePath;
@@ -46,6 +48,8 @@ private:
 
 	Node<double> * level;
 	Node<int> * bisearchLevel;
+	Node<double> * elementSize;
+	virtual void childChanged();
 
 	void updateSettings();
 

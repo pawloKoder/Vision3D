@@ -7,8 +7,8 @@
 class BrickModel
 {
 public:
-	BrickModel(const QList<QVariant> &data, BrickModel *parent = 0);
-	BrickModel(BrickModel *parent = 0);
+	BrickModel(const QList<QVariant> &data, BrickModel *parent = nullptr);
+	BrickModel(BrickModel *parent = nullptr);
 	virtual ~BrickModel();
 
 	void appendChild(BrickModel *child);
@@ -33,6 +33,7 @@ protected:
 
 private:
 	void setParent(BrickModel *);
+	virtual void childChanged(){}
 };
 
 #endif // BRICKMODEL_H

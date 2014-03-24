@@ -4,18 +4,12 @@
 #include <QVector3D>
 #include <GL/glu.h>
 
-IsosurfaceRenderer::IsosurfaceRenderer()
+IsosurfaceRenderer::IsosurfaceRenderer() :
+	changed(false)
 {
 	level = new Node<double>(this, 0.1, "ValueOfIsosurface");
 	bisearchLevel = new Node<int>(this, 5, "Level of bisearch algorithm");
-	elementSize = 0.04;
-
-	for(int i = 0; i < 3; ++i)
-	{
-		numOfElements[i] = 50;
-		begin[i] = -1.0;
-	}
-
+	elementSize = new Node<double>(this, 0.1, "ElementSize");
 }
 
 IsosurfaceRenderer::~IsosurfaceRenderer()
@@ -32,8 +26,41 @@ QString IsosurfaceRenderer::getDesc() const
 	return "Isosurface renderer";
 }
 
+void IsosurfaceRenderer::childChanged()
+{
+	changed = true;
+}
+
+void IsosurfaceRenderer::updateSettings()
+{
+	if(cachePath != path->getValue().getString())
+	{
+		cachePath = path->getValue().getString();
+		data = XYZVloader(cachePath);
+		interpolator.setData(&data);
+		interpolator.setParameter(2.0);
+	}
+
+	if(changed)
+	{
+		for(int i = 0; i < 3; ++i)
+		{
+			numOfElements[i] = (data.max[i] - data.min[i]) / elementSize->getValue();
+			begin[i] = data.min[i];
+		}
+		marchingTetrahedrons();
+		changed = false;
+	}
+
+	qDebug("Num of elements %d %d %d", numOfElements[0], numOfElements[1], numOfElements[2]);
+	qDebug("Values %f %f %f", data.max[0], data.max[1], data.max[2]);
+	qDebug("Values %f %f %f", data.min[0], data.min[1], data.min[2]);
+}
+
 void IsosurfaceRenderer::paintImpl()
 {
+	updateSettings();
+
 	glEnable(GL_LIGHTING);
 
 	glEnable(GL_LIGHT0);
@@ -61,7 +88,10 @@ void IsosurfaceRenderer::paintImpl()
 	glMaterialfv(GL_FRONT, GL_EMISSION, materialEmission);
 	glMaterialf(GL_FRONT, GL_SHININESS, shininess);
 
-	marchingTetrahedrons();
+
+	glPushMatrix();
+	drawTriangles();
+	glPopMatrix();
 
 	glDisable(GL_LIGHT0);
 	glEnable(GL_COLOR_MATERIAL);
@@ -69,14 +99,14 @@ void IsosurfaceRenderer::paintImpl()
 
 void IsosurfaceRenderer::marchingTetrahedrons()
 {
-	updateSettings();
+	triangles.clear();
+	double sizeOfElement = elementSize->getValue();
 
 	float diff[8][3];
 	for(int i=0; i<8; ++i)
 		for(int j=0; j<3; ++j)
-			diff[i][j] = elementSize * (i&(1<<j) ? 0.0 : -1.0);
+			diff[i][j] = sizeOfElement * (i&(1<<j) ? 0.0 : -1.0);
 
-	glPushMatrix();
 
 	float cords[3];
 	int nums[3];
@@ -84,7 +114,7 @@ void IsosurfaceRenderer::marchingTetrahedrons()
 	float cube[8][3];
 	QVector3Dext nodes[8];
 
-	numOfNodes =  numOfElements[0]* numOfElements[1]* numOfElements[2];
+	numOfNodes =  numOfElements[0] * numOfElements[1] * numOfElements[2];
 	normals.clear();
 
 	for(nums[0] = 1; nums[0] < numOfElements[0]; ++nums[0])
@@ -93,7 +123,7 @@ void IsosurfaceRenderer::marchingTetrahedrons()
 			for(nums[2] = 1; nums[2] < numOfElements[2]; ++nums[2])
 			{
 				for(int j=0; j<3; ++j)
-					cords[j] = begin[j] + elementSize*nums[j];
+					cords[j] = begin[j] + sizeOfElement * nums[j];
 
 				for(int i=0; i<8; ++i)
 					for(int j=0; j<3; ++j)
@@ -117,19 +147,6 @@ void IsosurfaceRenderer::marchingTetrahedrons()
 				computeTetrahedon(nodes[1],nodes[4],nodes[5],nodes[6]);
 				computeTetrahedon(nodes[1],nodes[6],nodes[5],nodes[7]);
 			}
-	}
-
-	drawTriangles();
-	glPopMatrix();
-}
-
-
-void IsosurfaceRenderer::updateSettings()
-{
-	if(cachePath != path->getValue().getString())
-	{
-		cachePath = path->getValue().getString();
-		data = XYZVloader(cachePath);
 	}
 }
 
@@ -293,9 +310,8 @@ void IsosurfaceRenderer::drawTriangles()
 	GLfloat materialColor[] = {(float)c.redF(), (float)c.greenF(), (float)c.blueF(), 1.0};
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, materialColor);
 
-	while(!triangles.empty())
+	foreach(const Triangle & tr, triangles)
 	{
-		Triangle tr = triangles.back();
 		glBegin(GL_TRIANGLES);
 		for(int i=0; i<3; ++i)
 		{
@@ -305,13 +321,12 @@ void IsosurfaceRenderer::drawTriangles()
 		}
 
 		glEnd();
-		triangles.pop_back();
 	}
 }
 
 bool IsosurfaceRenderer::test(QVector3D & f)
 {
-	return f.length() < level->getValue();
+	return (interpolator.value(f)-data.min[3])/(data.max[3]-data.min[3]) < level->getValue();
 }
 
 float IsosurfaceRenderer::test(QVector3D & a, QVector3D & b)

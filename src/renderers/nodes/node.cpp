@@ -25,6 +25,9 @@ template<class T>
 void Node<T>::setValue(T value)
 {
 	itemData[0] = QVariant::fromValue(value);
+
+	if(parent() != nullptr)
+		parent()->childChanged();
 }
 
 template<class T>

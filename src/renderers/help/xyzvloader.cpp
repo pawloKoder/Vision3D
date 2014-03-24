@@ -25,8 +25,10 @@ void XYZVloader::reload()
 
 	vertices.clear();
 
+
 	QTextStream in(&file);
 	float values[4];
+	bool first = true;
 
 	while (!in.atEnd())
 	{
@@ -40,11 +42,18 @@ void XYZVloader::reload()
 		vertices.push_back(QPair<QVector3D, double>(QVector3D(values[0], values[1], values[2]),
 			values[3]));
 
-		for (int i = 0; i < 4; ++i)
+		if (first)
 		{
-			min[i] = std::min(min[i], values[i]);
-			max[i] = std::max(max[i], values[i]);
+			for (int i = 0; i < 4; ++i)
+				min[i] = max[i] =  values[i];
+			first = false;
 		}
+		else
+			for (int i = 0; i < 4; ++i)
+			{
+				min[i] = std::min(min[i], values[i]);
+				max[i] = std::max(max[i], values[i]);
+			}
 	}
 }
 

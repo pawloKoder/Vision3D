@@ -97,7 +97,7 @@ float Cube::getPresure(unsigned wall) const
 
 bool Cube::isBoundaryWall(unsigned wall) const
 {
-	return connected[wall];
+	return connected[wall] < 0;
 }
 
 unsigned Cube::getNumberOfNode(unsigned node) const

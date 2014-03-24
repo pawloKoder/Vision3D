@@ -3,7 +3,9 @@
 
 #include "renderer.h"
 #include "help/xyzvloader.h"
+#include "help/rainbow.h"
 #include "nodes/node.h"
+
 
 class MIPrenderer : public Renderer
 {
@@ -21,6 +23,7 @@ private:
 	QString cachePath;
 	XYZVloader data;
 	Node<double> * size;
+	Rainbow rainbow;
 
 	void updateSettings();
 	void setColor(float ratio);

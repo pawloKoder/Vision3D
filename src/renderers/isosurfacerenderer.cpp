@@ -288,19 +288,16 @@ void IsosurfaceRenderer::two(QVector3Dext &a, QVector3Dext &b, QVector3Dext & c,
 
 void IsosurfaceRenderer::drawTriangles()
 {
+	QColor c = rainbow.getColor(level->getValue());
+	GLfloat materialColor[] = {(float)c.redF(), (float)c.greenF(), (float)c.blueF(), 1.0};
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, materialColor);
+
 	while(!triangles.empty())
 	{
 		Triangle tr = triangles.back();
 		glBegin(GL_TRIANGLES);
 		for(int i=0; i<3; ++i)
 		{
-			GLfloat materialColor[] = {0.2+0.5*tr.cords[i].pos.x(),
-				0.2+0.5*tr.cords[i].pos.y(),
-				0.2+0.5*tr.cords[i].pos.z(),
-				1.0};
-
-			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, materialColor);
-
 			QVector3D norm = normals[tr.cords[i].num].normalized();
 			glNormal3f(norm.x(), norm.y(), norm.z());
 			glVertex3f(tr.cords[i].pos.x(), tr.cords[i].pos.y(), tr.cords[i].pos.z());

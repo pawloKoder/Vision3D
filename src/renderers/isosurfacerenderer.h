@@ -3,6 +3,7 @@
 
 #include "renderer.h"
 #include "help/xyzvloader.h"
+#include "help/rainbow.h"
 #include "nodes/colornode.h"
 #include "nodes/node.h"
 
@@ -37,6 +38,7 @@ private:
 	double begin[3];
 	int numOfElements[3];
 	int numOfNodes;
+	Rainbow rainbow;
 	std::vector<Triangle> triangles;
 
 	QString cachePath;

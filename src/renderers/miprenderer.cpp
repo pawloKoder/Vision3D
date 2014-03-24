@@ -53,26 +53,8 @@ void MIPrenderer::paintImpl()
 
 void MIPrenderer::setColor(float ratio)
 {
-	const int stepNum = 7;
-	float steps[stepNum][4] ={{0.00, 1.00, 0.00, 0.00},
-						{0.16, 1.00, 0.49, 0.00},
-						{0.32, 1.00, 1.00, 0.00},
-						{0.48, 0.00, 1.00, 0.00},
-						{0.64, 0.00, 0.00, 1.00},
-						{0.80, 0.44, 0.00, 1.00},
-						{1.01, 0.56, 0.00, 1.00}};
-
-	for(int i=1; i<stepNum; ++i)
-		if(ratio < steps[i][0])
-		{
-			float tmp = ratio / (steps[i][0] - steps[i-1][0]);
-			float r = (steps[i][1] - steps[i-1][1]) * tmp + steps[i-1][1];
-			float g = (steps[i][2] - steps[i-1][2]) * tmp + steps[i-1][2];
-			float b = (steps[i][3] - steps[i-1][3]) * tmp + steps[i-1][3];
-			glColor3f(r,g,b);
-			return;
-		}
-	glColor3f(.0,.0,.0);
+	QColor c = rainbow.getColor(ratio);
+	glColor3f(c.redF(), c.greenF(), c.blueF());
 }
 
 void MIPrenderer::updateSettings()

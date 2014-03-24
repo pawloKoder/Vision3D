@@ -51,6 +51,13 @@ void MainWindow::createToolBar()
 	tool->addSeparator();
 	tool->addAction(QIcon(":/icons/refresh.png"), Strings::Refresh,
 		this, SIGNAL(refreshSignal()));
+	tool->addSeparator();
+	tool->addAction(QIcon(":/icons/V1.png"), Strings::Front,
+		this, SLOT(resetViewFrontSlot()));
+	tool->addAction(QIcon(":/icons/V2.png"), Strings::Top,
+		this, SLOT(resetViewTopSlot()));
+	tool->addAction(QIcon(":/icons/V3.png"), Strings::Side,
+		this, SLOT(resetViewSideSlot()));
 
 	addToolBar(tool);
 }
@@ -88,4 +95,22 @@ void MainWindow::toggleProjectionSlot()
 void MainWindow::toggleSphereSlot()
 {
 	ViewSettings::toggleSphereRendering();
+}
+
+void MainWindow::resetViewFrontSlot()
+{
+	ViewSettings::resetViewFront();
+	emit refreshSignal();
+}
+
+void MainWindow::resetViewTopSlot()
+{
+	ViewSettings::resetViewTop();
+	emit refreshSignal();
+}
+
+void MainWindow::resetViewSideSlot()
+{
+	ViewSettings::resetViewSide();
+	emit refreshSignal();
 }

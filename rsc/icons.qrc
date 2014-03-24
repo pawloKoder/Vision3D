@@ -9,5 +9,8 @@
         <file>icons/P.png</file>
         <file>icons/sphere.png</file>
         <file>icons/mesh.png</file>
+        <file>icons/V1.png</file>
+        <file>icons/V2.png</file>
+        <file>icons/V3.png</file>
     </qresource>
 </RCC>

@@ -24,6 +24,10 @@ public:
 	static bool sphereRendering();
 	static void toggleSphereRendering();
 
+	static void resetViewFront();
+	static void resetViewTop();
+	static void resetViewSide();
+
 signals:
 	void setViewData(ViewData);
 

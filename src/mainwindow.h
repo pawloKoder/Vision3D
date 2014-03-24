@@ -30,6 +30,9 @@ private slots:
 	void createNewMeshSlot();
 	void toggleProjectionSlot();
 	void toggleSphereSlot();
+	void resetViewFrontSlot();
+	void resetViewTopSlot();
+	void resetViewSideSlot();
 
 private:
 

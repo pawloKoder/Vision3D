@@ -13,6 +13,10 @@ namespace Strings {
 	const QString ToggleProjection = QObject::tr("Toogle Projection.");
 	const QString ToggleSphere = QObject::tr("Toogle Sphere rendering.");
 	const QString Refresh = QObject::tr("Refresh.");
+
+	const QString Front = QObject::tr("Front.");
+	const QString Top = QObject::tr("Top.");
+	const QString Side = QObject::tr("Side.");
 }
 
 #endif // STRINGS_H

@@ -77,3 +77,21 @@ void ViewSettings::toggleSphereRendering()
 {
 	self().data.sphere = ! self().data.sphere;
 }
+
+void ViewSettings::resetViewFront()
+{
+	self().data.rotation[0] = 0.0;
+	self().data.rotation[1] = 0.0;
+}
+
+void ViewSettings::resetViewTop()
+{
+	self().data.rotation[0] = -0.5;
+	self().data.rotation[1] = 0.5;
+}
+
+void ViewSettings::resetViewSide()
+{
+	self().data.rotation[0] = 0.0;
+	self().data.rotation[1] = 0.25;
+}

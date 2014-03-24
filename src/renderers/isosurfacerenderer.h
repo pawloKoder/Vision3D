@@ -45,6 +45,7 @@ private:
 	XYZVloader data;
 
 	Node<double> * level;
+	Node<int> * bisearchLevel;
 
 	void updateSettings();
 

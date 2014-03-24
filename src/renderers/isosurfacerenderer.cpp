@@ -7,6 +7,7 @@
 IsosurfaceRenderer::IsosurfaceRenderer()
 {
 	level = new Node<double>(this, 0.1, "ValueOfIsosurface");
+	bisearchLevel = new Node<int>(this, 5, "Level of bisearch algorithm");
 	elementSize = 0.04;
 
 	for(int i = 0; i < 3; ++i)
@@ -44,7 +45,7 @@ void IsosurfaceRenderer::paintImpl()
 
 	GLfloat lightColor[] = {0.7f, 0.7f, 0.7f, 1.0f};
 	GLfloat specLightColor[] = {0.6f, 0.6f, 0.6f, 1.0f};
-	GLfloat lightPos[] = {3 , 3 , 3 , 1.0f};
+	GLfloat lightPos[] = {7 , 7 , 7 , 1.0f};
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specLightColor);
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos);
@@ -317,7 +318,7 @@ float IsosurfaceRenderer::test(QVector3D & a, QVector3D & b)
 {
 	float left = 0;
 	float right = 1.0;
-	int stepNumber = 2;
+	int stepNumber = bisearchLevel->getValue();
 
 	if(!test(a))
 		std::swap(left, right);

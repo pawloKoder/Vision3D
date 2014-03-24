@@ -27,6 +27,7 @@ private slots:
 	void createNewIsosurfaceSlot();
 	void createNewMIPSlot();
 	void createNewPointsSlot();
+	void createNewMeshSlot();
 	void toggleProjectionSlot();
 	void toggleSphereSlot();
 

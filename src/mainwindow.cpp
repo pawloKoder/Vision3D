@@ -39,8 +39,10 @@ void MainWindow::createToolBar()
 		this, SLOT(createNewIsosurfaceSlot()));
 	tool->addAction(QIcon(":/icons/M.png"), Strings::NewMIP,
 		this, SLOT(createNewMIPSlot()));
-	tool->addAction(QIcon(":/icons/P.png"), Strings::NewMIP,
+	tool->addAction(QIcon(":/icons/P.png"), Strings::NewPoints,
 		this, SLOT(createNewPointsSlot()));
+	tool->addAction(QIcon(":/icons/mesh.png"), Strings::NewMesh,
+		this, SLOT(createNewMeshSlot()));
 	tool->addSeparator();
 	tool->addAction(QIcon(":/icons/projection.png"), Strings::ToggleProjection,
 		this, SLOT(toggleProjectionSlot()));
@@ -71,6 +73,11 @@ void MainWindow::createNewMIPSlot()
 void MainWindow::createNewPointsSlot()
 {
 	Model::self().createNewView(new PointsRenderer());
+}
+
+void MainWindow::createNewMeshSlot()
+{
+	Model::self().createNewView(new MeshRenderer());
 }
 
 void MainWindow::toggleProjectionSlot()

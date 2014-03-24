@@ -6,5 +6,6 @@
 #include "miprenderer.h"
 #include "isosurfacerenderer.h"
 #include "pointsrenderer.h"
+#include "meshrenderer.h"
 
 #endif // RENDERERS_H

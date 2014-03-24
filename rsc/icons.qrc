@@ -8,5 +8,6 @@
         <file>icons/refresh.png</file>
         <file>icons/P.png</file>
         <file>icons/sphere.png</file>
+        <file>icons/mesh.png</file>
     </qresource>
 </RCC>

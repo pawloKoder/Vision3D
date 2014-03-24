@@ -42,7 +42,10 @@ SOURCES += src/main.cpp\
     src/delegates/checkboxdelegate.cpp \
     src/renderers/pointsrenderer.cpp \
     src/renderers/help/rainbow.cpp \
-    src/renderers/help/basicinterpolator.cpp
+    src/renderers/help/basicinterpolator.cpp \
+    src/renderers/meshrenderer.cpp \
+    src/renderers/mesh/savefile.cpp \
+    src/renderers/help/meshloader.cpp
 
 HEADERS  += src/mainwindow.h \
     src/leftmenu.h \
@@ -74,7 +77,10 @@ HEADERS  += src/mainwindow.h \
     src/delegates/checkboxdelegate.h \
     src/renderers/pointsrenderer.h \
     src/renderers/help/rainbow.h \
-    src/renderers/help/basicinterpolator.h
+    src/renderers/help/basicinterpolator.h \
+    src/renderers/meshrenderer.h \
+    src/renderers/mesh/savefile.h \
+    src/renderers/help/meshloader.h
 
 RESOURCES += \
     rsc/icons.qrc

@@ -40,7 +40,8 @@ SOURCES += src/main.cpp\
     src/renderers/miprenderer.cpp \
     src/renderers/help/xyzvloader.cpp \
     src/delegates/checkboxdelegate.cpp \
-    src/renderers/pointsrenderer.cpp
+    src/renderers/pointsrenderer.cpp \
+    src/renderers/help/rainbow.cpp
 
 HEADERS  += src/mainwindow.h \
     src/leftmenu.h \
@@ -70,7 +71,8 @@ HEADERS  += src/mainwindow.h \
     src/renderers/miprenderer.h \
     src/renderers/help/xyzvloader.h \
     src/delegates/checkboxdelegate.h \
-    src/renderers/pointsrenderer.h
+    src/renderers/pointsrenderer.h \
+    src/renderers/help/rainbow.h
 
 RESOURCES += \
     rsc/icons.qrc

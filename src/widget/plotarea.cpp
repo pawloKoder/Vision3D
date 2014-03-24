@@ -109,17 +109,6 @@ void PlotArea::computeView()
 	gluLookAt(position.x(),position.y(),position.z(),
 			0,0,0,
 			  up.x(),up.y(),up.z());
-
-	glLineWidth(4.0);
-	glBegin(GL_LINES);
-		glVertex3f(0.0,0.0,0.0);
-		glVertex3f(position.x(),position.y(),position.z());
-	glEnd();
-	glBegin(GL_LINES);
-		glVertex3f(0.0,0.0,0.0);
-		glVertex3f(3*sin(alpha)*sin(beta),3*(-cos(alpha)),3*sin(alpha)*cos(beta));
-	glEnd();
-	glLineWidth(1.0);
 }
 
 void PlotArea::mouseMoveEvent(QMouseEvent* event){

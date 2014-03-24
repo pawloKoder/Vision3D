@@ -32,6 +32,7 @@ protected:
 private:
 	void clear();
 	void computeView();
+	void setupPerspective();
 
 	ViewData view;
 	QVector3D position;

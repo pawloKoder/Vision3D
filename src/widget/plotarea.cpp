@@ -33,32 +33,41 @@ void PlotArea::initializeGL()
 
 void PlotArea::resizeGL(int w, int h)
 {
-	view = ViewSettings::getViewData();
-
 	glMatrixMode(GL_PROJECTION);
 
-	glLoadIdentity();
 
 	float Sx =(GLint)w;
 	float Sy =(GLint)h;
 	glViewport(0, 0, Sx, Sy);
 
-	float ratio = Sx/Sy;
+	setupPerspective();
+
+	paintGL();
+}
+
+void PlotArea::setupPerspective()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	view = ViewSettings::getViewData();
+
+	float ratio = (float)size().width()/(float)size().height();
 
 	if (view.projection)
 		gluPerspective(35.0, ratio, 0.1f, 1000.0f);
 	else
 		glOrtho(-10.0*view.zoom, 10.0*view.zoom, -10.0*view.zoom / ratio,
 			10.0*view.zoom / ratio, -100.0, 100.0);
-
-	paintGL();
 }
 
 void PlotArea::paintGL()
 {
+	setupPerspective();
+
 	view = ViewSettings::getViewData();
 
 	clear();
+
 	computeView();
 
 	Model::paintAll();

@@ -39,7 +39,8 @@ SOURCES += src/main.cpp\
     src/renderers/isosurfacerenderer.cpp \
     src/renderers/miprenderer.cpp \
     src/renderers/help/xyzvloader.cpp \
-    src/delegates/checkboxdelegate.cpp
+    src/delegates/checkboxdelegate.cpp \
+    src/renderers/pointsrenderer.cpp
 
 HEADERS  += src/mainwindow.h \
     src/leftmenu.h \
@@ -68,7 +69,8 @@ HEADERS  += src/mainwindow.h \
     src/renderers/isosurfacerenderer.h \
     src/renderers/miprenderer.h \
     src/renderers/help/xyzvloader.h \
-    src/delegates/checkboxdelegate.h
+    src/delegates/checkboxdelegate.h \
+    src/renderers/pointsrenderer.h
 
 RESOURCES += \
     rsc/icons.qrc

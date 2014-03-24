@@ -5,5 +5,6 @@
 #include "trajectoryrenderer.h"
 #include "miprenderer.h"
 #include "isosurfacerenderer.h"
+#include "pointsrenderer.h"
 
 #endif // RENDERERS_H

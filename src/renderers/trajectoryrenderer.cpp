@@ -31,14 +31,14 @@ void TrajectoryRenderer::paintImpl()
 	glColor3f(color->getValue().redF(), color->getValue().greenF(),
 		color->getValue().blueF());
 
-	glBegin(GL_POINTS);
+	glBegin(GL_LINES);
 	QVector3D prev;
 	foreach(auto current, data.vertices)
 	{
 		if((prev - current).length() > level->getValue())
 		{
-			//glEnd();
-			//glBegin(GL_LINES);
+			glEnd();
+			glBegin(GL_LINES);
 		}
 		glVertex3f(current.x(), current.y(), current.z());
 		prev = current;

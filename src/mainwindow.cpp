@@ -9,6 +9,8 @@
 #include "renderers/renderers.h"
 #include "base/strings.h"
 
+// Images form http://cooltext.com/Logo-Design-Chrome-One
+
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
 {
@@ -37,6 +39,8 @@ void MainWindow::createToolBar()
 		this, SLOT(createNewIsosurfaceSlot()));
 	tool->addAction(QIcon(":/icons/M.png"), Strings::NewMIP,
 		this, SLOT(createNewMIPSlot()));
+	tool->addAction(QIcon(":/icons/P.png"), Strings::NewMIP,
+		this, SLOT(createNewPointsSlot()));
 	tool->addSeparator();
 	tool->addAction(QIcon(":/icons/projection.png"), Strings::ToggleProjection,
 		this, SLOT(toggleProjectionSlot()));
@@ -60,6 +64,11 @@ void MainWindow::createNewIsosurfaceSlot()
 void MainWindow::createNewMIPSlot()
 {
 	Model::self().createNewView(new MIPrenderer());
+}
+
+void MainWindow::createNewPointsSlot()
+{
+	Model::self().createNewView(new PointsRenderer());
 }
 
 void MainWindow::toggleProjectionSlot()

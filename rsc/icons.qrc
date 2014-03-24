@@ -6,5 +6,6 @@
         <file>icons/T.png</file>
         <file>icons/projection.png</file>
         <file>icons/refresh.png</file>
+        <file>icons/P.png</file>
     </qresource>
 </RCC>

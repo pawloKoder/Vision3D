@@ -26,6 +26,7 @@ private slots:
 	void createNewTrajectorySlot();
 	void createNewIsosurfaceSlot();
 	void createNewMIPSlot();
+	void createNewPointsSlot();
 	void toggleProjectionSlot();
 
 private:

@@ -81,7 +81,7 @@ void ViewSettings::toggleSphereRendering()
 void ViewSettings::resetViewFront()
 {
 	self().data.rotation[0] = 0.0;
-	self().data.rotation[1] = 0.0;
+	self().data.rotation[1] = 0.5;
 }
 
 void ViewSettings::resetViewTop()

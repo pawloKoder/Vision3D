@@ -90,11 +90,13 @@ void MainWindow::createNewMeshSlot()
 void MainWindow::toggleProjectionSlot()
 {
 	ViewSettings::toggleProjection();
+	emit refreshSignal();
 }
 
 void MainWindow::toggleSphereSlot()
 {
 	ViewSettings::toggleSphereRendering();
+	emit refreshSignal();
 }
 
 void MainWindow::resetViewFrontSlot()

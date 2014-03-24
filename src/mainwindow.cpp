@@ -44,6 +44,8 @@ void MainWindow::createToolBar()
 	tool->addSeparator();
 	tool->addAction(QIcon(":/icons/projection.png"), Strings::ToggleProjection,
 		this, SLOT(toggleProjectionSlot()));
+	tool->addAction(QIcon(":/icons/sphere.png"), Strings::ToggleSphere,
+		this, SLOT(toggleSphereSlot()));
 	tool->addSeparator();
 	tool->addAction(QIcon(":/icons/refresh.png"), Strings::Refresh,
 		this, SIGNAL(refreshSignal()));
@@ -74,4 +76,9 @@ void MainWindow::createNewPointsSlot()
 void MainWindow::toggleProjectionSlot()
 {
 	ViewSettings::toggleProjection();
+}
+
+void MainWindow::toggleSphereSlot()
+{
+	ViewSettings::toggleSphereRendering();
 }

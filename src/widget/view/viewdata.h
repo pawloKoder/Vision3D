@@ -10,6 +10,7 @@ public:
 	float zoom;
 
 	bool projection;
+	bool sphere;
 
 	ViewData();
 };

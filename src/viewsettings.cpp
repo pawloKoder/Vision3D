@@ -67,3 +67,13 @@ void ViewSettings::toggleProjection()
 {
 	self().data.projection = !self().data.projection;
 }
+
+bool ViewSettings::sphereRendering()
+{
+	return self().data.sphere;
+}
+
+void ViewSettings::toggleSphereRendering()
+{
+	self().data.sphere = ! self().data.sphere;
+}

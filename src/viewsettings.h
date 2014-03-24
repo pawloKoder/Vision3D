@@ -21,6 +21,9 @@ public:
 	static bool projection();
 	static void toggleProjection();
 
+	static bool sphereRendering();
+	static void toggleSphereRendering();
+
 signals:
 	void setViewData(ViewData);
 

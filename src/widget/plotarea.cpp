@@ -73,10 +73,14 @@ void PlotArea::paintGL()
 	Model::paintAll();
 
 	glColor3f(0.0,0.0,0.0);
-	GLUquadricObj *quadric;
-	quadric = gluNewQuadric();
-	gluQuadricDrawStyle(quadric, GLU_LINE );
-	gluSphere( quadric ,  10 , 18 , 9 );
+
+	if(view.sphere)
+	{
+		GLUquadricObj *quadric;
+		quadric = gluNewQuadric();
+		gluQuadricDrawStyle(quadric, GLU_LINE );
+		gluSphere( quadric ,  10 , 18 , 9 );
+	}
 }
 
 void PlotArea::clear()

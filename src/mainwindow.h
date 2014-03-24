@@ -28,6 +28,7 @@ private slots:
 	void createNewMIPSlot();
 	void createNewPointsSlot();
 	void toggleProjectionSlot();
+	void toggleSphereSlot();
 
 private:
 

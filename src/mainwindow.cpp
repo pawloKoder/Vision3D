@@ -14,6 +14,8 @@
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent)
 {
+	setWindowTitle("Vision3D");
+
 	createToolBar();
 
 	QSplitter *splitter = new QSplitter(Qt::Horizontal, this);
@@ -24,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	setCentralWidget(splitter);
 
 	connect(this, SIGNAL(refreshSignal()), area, SLOT(repaint()));
+
+	resize(800, 600);
+
 }
 
 MainWindow::~MainWindow()

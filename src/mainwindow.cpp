@@ -46,6 +46,8 @@ void MainWindow::createToolBar()
 		this, SLOT(createNewMIPSlot()));
 	tool->addAction(QIcon(":/icons/P.png"), Strings::NewPoints,
 		this, SLOT(createNewPointsSlot()));
+	tool->addAction(QIcon(":/icons/V.png"), Strings::NewVector,
+		this, SLOT(createNewVectorSlot()));
 	tool->addAction(QIcon(":/icons/mesh.png"), Strings::NewMesh,
 		this, SLOT(createNewMeshSlot()));
 	tool->addSeparator();
@@ -90,6 +92,11 @@ void MainWindow::createNewPointsSlot()
 void MainWindow::createNewMeshSlot()
 {
 	Model::self().createNewView(new MeshRenderer());
+}
+
+void MainWindow::createNewVectorSlot()
+{
+	Model::self().createNewView(new VectorRenderer());
 }
 
 void MainWindow::toggleProjectionSlot()

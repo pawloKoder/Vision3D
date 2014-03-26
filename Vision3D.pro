@@ -45,7 +45,8 @@ SOURCES += src/main.cpp\
     src/renderers/help/basicinterpolator.cpp \
     src/renderers/meshrenderer.cpp \
     src/renderers/mesh/savefile.cpp \
-    src/renderers/help/meshloader.cpp
+    src/renderers/help/meshloader.cpp \
+    src/renderers/vectorrenderer.cpp
 
 HEADERS  += src/mainwindow.h \
     src/leftmenu.h \
@@ -80,7 +81,8 @@ HEADERS  += src/mainwindow.h \
     src/renderers/help/basicinterpolator.h \
     src/renderers/meshrenderer.h \
     src/renderers/mesh/savefile.h \
-    src/renderers/help/meshloader.h
+    src/renderers/help/meshloader.h \
+    src/renderers/vectorrenderer.h
 
 RESOURCES += \
     rsc/icons.qrc

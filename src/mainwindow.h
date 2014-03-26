@@ -28,6 +28,7 @@ private slots:
 	void createNewMIPSlot();
 	void createNewPointsSlot();
 	void createNewMeshSlot();
+	void createNewVectorSlot();
 	void toggleProjectionSlot();
 	void toggleSphereSlot();
 	void resetViewFrontSlot();

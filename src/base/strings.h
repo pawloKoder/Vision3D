@@ -9,6 +9,7 @@ namespace Strings {
 	const QString NewMIP = QObject::tr("New MIP view.");
 	const QString NewPoints = QObject::tr("New points view.");
 	const QString NewMesh = QObject::tr("New mesh view.");
+	const QString NewVector = QObject::tr("New vector view.");
 
 	const QString ToggleProjection = QObject::tr("Toogle Projection.");
 	const QString ToggleSphere = QObject::tr("Toogle Sphere rendering.");

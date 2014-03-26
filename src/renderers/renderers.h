@@ -7,5 +7,6 @@
 #include "isosurfacerenderer.h"
 #include "pointsrenderer.h"
 #include "meshrenderer.h"
+#include "vectorrenderer.h"
 
 #endif // RENDERERS_H

@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Vision3D
 TEMPLATE = app
 CONFIG += c++11
+QMAKE_CXXFLAGS += -std=c++11
+LIBS += -lGLU
 
 
 SOURCES += src/main.cpp\
@@ -86,3 +88,4 @@ HEADERS  += src/mainwindow.h \
 
 RESOURCES += \
     rsc/icons.qrc
+

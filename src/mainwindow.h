@@ -24,6 +24,7 @@ signals:
 
 private slots:
 	void createNewTrajectorySlot();
+	void createNewTrajectoryWidthSlot();
 	void createNewIsosurfaceSlot();
 	void createNewMIPSlot();
 	void createNewPointsSlot();

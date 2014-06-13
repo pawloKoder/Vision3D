@@ -48,6 +48,8 @@ void MainWindow::createToolBar()
 		this, SLOT(createNewPointsSlot()));
 	tool->addAction(QIcon(":/icons/V.png"), Strings::NewVector,
 		this, SLOT(createNewVectorSlot()));
+	tool->addAction(QIcon(":/icons/Tw.png"), Strings::NewTajectoryWidth,
+		this, SLOT(createNewTrajectoryWidthSlot()));
 	tool->addAction(QIcon(":/icons/mesh.png"), Strings::NewMesh,
 		this, SLOT(createNewMeshSlot()));
 	tool->addSeparator();
@@ -72,6 +74,11 @@ void MainWindow::createToolBar()
 void MainWindow::createNewTrajectorySlot()
 {
 	Model::self().createNewView(new TrajectoryRenderer());
+}
+
+void MainWindow::createNewTrajectoryWidthSlot()
+{
+	Model::self().createNewView(new TrajectoryWidthRenderer());
 }
 
 void MainWindow::createNewIsosurfaceSlot()

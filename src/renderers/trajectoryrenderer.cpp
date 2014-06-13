@@ -35,13 +35,13 @@ void TrajectoryRenderer::paintImpl()
 	QVector3D prev;
 	foreach(auto current, data.vertices)
 	{
-		if((prev - current).length() > level->getValue())
+		if((prev - current.first).length() > level->getValue())
 		{
 			glEnd();
 			glBegin(GL_LINE_STRIP);
 		}
-		glVertex3f(current.x(), current.y(), current.z());
-		prev = current;
+		glVertex3f(current.first.x(), current.first.y(), current.first.z());
+		prev = current.first;
 	}
 	glEnd();
 }
@@ -51,6 +51,6 @@ void TrajectoryRenderer::updateSettings()
 	if(cachePath != path->getValue().getString())
 	{
 		cachePath = path->getValue().getString();
-		data = XYZloader(cachePath);
+		data = XYZVloader(cachePath);
 	}
 }

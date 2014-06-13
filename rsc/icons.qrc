@@ -13,5 +13,6 @@
         <file>icons/V2.png</file>
         <file>icons/V3.png</file>
         <file>icons/V.png</file>
+        <file>icons/Tw.png</file>
     </qresource>
 </RCC>

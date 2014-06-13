@@ -1,18 +1,18 @@
-#ifndef TRAJECTORYRENDERER_H
-#define TRAJECTORYRENDERER_H
+#ifndef TRAJECTORYWIDTHRENDERER_H
+#define TRAJECTORYWIDTHRENDERER_H
 
 #include "renderer.h"
 #include "help/xyzvloader.h"
 #include "nodes/colornode.h"
 #include "nodes/node.h"
 
-class TrajectoryRenderer : public Renderer
+class TrajectoryWidthRenderer : public Renderer
 {
 	ColorNode * color;
 	Node<double> * level;
 public:
-	TrajectoryRenderer();
-	virtual ~TrajectoryRenderer();
+	TrajectoryWidthRenderer();
+	virtual ~TrajectoryWidthRenderer();
 
 	virtual QString getName() const;
 	virtual QString getDesc() const;
@@ -25,6 +25,8 @@ private:
 	XYZVloader data;
 
 	void updateSettings();
+	float scaleLineWidth(float);
 };
 
-#endif // TRAJECTORYRENDERER_H
+
+#endif // TRAJECTORYWIDTHRENDERER_H

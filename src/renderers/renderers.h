@@ -3,6 +3,7 @@
 
 #include "renderer.h"
 #include "trajectoryrenderer.h"
+#include "trajectorywidthrenderer.h"
 #include "miprenderer.h"
 #include "isosurfacerenderer.h"
 #include "pointsrenderer.h"

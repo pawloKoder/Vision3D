@@ -29,6 +29,13 @@ struct serializedQuadrilateral
 	float P[4];
 };
 
+struct concentratedForces
+{
+	void clear();
+
+	float values[4][3];
+};
+
 class Cube
 {
 	float Q[6][3]; //Load on walls
@@ -41,17 +48,12 @@ class Cube
 public:
 	Cube(serializedQuadrilateral);
 
-	float getLoadX(unsigned wall) const;
-	float getLoadY(unsigned wall) const;
-	float getLoadZ(unsigned wall) const;
-	float getPresure(unsigned wall) const;
+	float getLoadX(unsigned wall);
+	float getLoadY(unsigned wall);
+	float getLoadZ(unsigned wall);
+	float getPresure(unsigned wall);
 
-	bool isBoundaryWall(unsigned wall) const;
-
-	static int transNode(int);
-	static int unTransNode(int);
-	static int transWall(int);
-	static int unTransWall(int);
+	bool isBoundaryWall(unsigned wall);
 
 	unsigned getNumberOfNode(unsigned node) const;
 };
@@ -63,9 +65,11 @@ class SaveFile
 	std::vector<serializedPoint> points;
 	std::vector<serializedQuadrilateral> elements;
 
+
 	void writeHelper(const char *data, unsigned size);
 	void saveAll();
 public:
+	concentratedForces forces;
 	//! Opens file to save data.
 	SaveFile(std::string path);
 
@@ -84,9 +88,13 @@ class LoadFile
 	unsigned elementsIterator;
 
 	void readHelper(char *data, unsigned size);
+
+	void loadLegacy0x1EABA15E();
+	void loadCurrent();
 public:
 	std::vector<serializedPoint> points;
 	std::vector<serializedQuadrilateral> elements;
+	concentratedForces forces;
 
 	LoadFile(std::string path);
 

@@ -5,97 +5,73 @@
 #include <exception>
 #include <string>
 
-int Cube::transNode(int arg)
+void concentratedForces::clear()
 {
-	int transNodes[8];
-	transNodes[0] = 0;
-	transNodes[1] = 1;
-	transNodes[2] = 3;
-	transNodes[3] = 2;
-	transNodes[4] = 4;
-	transNodes[5] = 5;
-	transNodes[6] = 7;
-	transNodes[7] = 6;
-
-	return transNodes[arg];
-}
-
-int Cube::unTransNode(int arg)
-{
-	for(int i = 0; i < 8; ++i)
-		if(transNode(i) == arg)
-			return i;
-
-	return 0;
-}
-
-int Cube::transWall(int arg)
-{
-	int trans[6];
-	trans[0] = 4;
-	trans[1] = 3;
-	trans[2] = 5;
-	trans[3] = 2;
-	trans[4] = 0;
-	trans[5] = 1;
-
-	return trans[arg];
-}
-
-int Cube::unTransWall(int arg)
-{
-	for(int i = 0; i < 6; ++i)
-		if(transWall(i) == arg)
-			return i;
-
-	return 0;
+	for(int i = 0; i < 4; ++i)
+		for(int j = 0; j < 3; ++j)
+			values[i][j] = 0.0;
 }
 
 Cube::Cube(serializedQuadrilateral data)
 {
+	int transNodes[8];
+	transNodes[0] = 0;
+	transNodes[1] = 3;
+	transNodes[2] = 1;
+	transNodes[3] = 2;
+	transNodes[4] = 4;
+	transNodes[5] = 7;
+	transNodes[6] = 5;
+	transNodes[7] = 6;
+
+	int trans[6];
+	trans[0] = 4;
+	trans[1] = 5;
+	trans[2] = 0;
+	trans[3] = 2;
+	trans[4] = 3;
+	trans[5] = 1;
+
 	for(int i = 0; i < 8; ++i)
-		nodes[transNode(i)] = data.nodes[i];
+		nodes[i] = data.nodes[transNodes[i]];
 
 	for(int i = 0; i < 6; ++i)
-		connected[transWall(i)]= data.connected[i];
+		connected[i]= data.connected[trans[i]];
 
 	for(int j = 0; j < 3; ++j)
 		for(int i = 0; i < 6; ++i)
 			Q[i][j] = 0.0;
 
 	for(int j = 0; j < 3; ++j)
-		for(int i = 0; i < 4; ++i)
-			Q[transWall(i)][j]= data.Q[i][j];
-
-	for(int i = 0; i < 6; ++i)
-		P[i] = 0.0;
+		for(int i = 0; i < 6; ++i)
+			if(trans[i] < i)
+				Q[i][j]= data.Q[trans[i]][j];
 
 	for(int i = 0; i < 4; ++i)
-		P[transWall(i)]= data.P[i];
-
+			P[i] = 0.0;
 }
 
-float Cube::getLoadX(unsigned wall) const
+float Cube::getLoadX(unsigned wall)
 {
 	return Q[wall][0];
 }
 
-float Cube::getLoadY(unsigned wall) const
+float Cube::getLoadY(unsigned wall)
 {
 	return Q[wall][1];
 }
 
-float Cube::getLoadZ(unsigned wall) const
+float Cube::getLoadZ(unsigned wall)
 {
 	return Q[wall][2];
 }
 
-float Cube::getPresure(unsigned wall) const
+float Cube::getPresure(unsigned wall)
 {
 	return P[wall];
 }
 
-bool Cube::isBoundaryWall(unsigned wall) const
+bool Cube::isBoundaryWall(unsigned wall)
 {
 	return connected[wall] < 0;
 }
@@ -106,7 +82,9 @@ unsigned Cube::getNumberOfNode(unsigned node) const
 }
 
 static unsigned previousHeaderNum = 0x1EABA15D;
-static unsigned headerNum = 0x1EABA15E;
+static unsigned previousHeaderNum2 = 0x1EABA15E;
+static unsigned previousHeaderNum3 = 0x1EABA15F;
+static unsigned headerNum = 0x1EABC15F;
 
 void SaveFile::writeHelper(const char *data, unsigned size)
 {
@@ -145,6 +123,8 @@ void SaveFile::saveAll()
 	unsigned M = elements.size();
 	writeHelper(reinterpret_cast<const char *>(&M),sizeof(unsigned));
 
+	writeHelper(reinterpret_cast<const char *>(&forces), sizeof(concentratedForces));
+
 	for(unsigned i = 0; i< N; ++i){
 		writeHelper(reinterpret_cast<const char *>(&points[i]), sizeof(serializedPoint));
 	}
@@ -175,13 +155,47 @@ LoadFile::LoadFile(std::string path) :
 	if(header == previousHeaderNum)
 		throw std::string("Thats not a correct mesh file. Propably previous version");
 
-	if(header != headerNum)
+	if(header == previousHeaderNum2)
+		loadLegacy0x1EABA15E();
+	else if(header == headerNum)
+		loadCurrent();
+	else
 		throw std::string("Thats not a correct mesh file.");
 
+}
+
+void LoadFile::loadLegacy0x1EABA15E()
+{
 	unsigned N;
 	readHelper(reinterpret_cast<char *>(&N), sizeof(unsigned));
 	unsigned M;
 	readHelper(reinterpret_cast<char *>(&M), sizeof(unsigned));
+
+	for(unsigned i = 0; i< N; ++i)
+	{
+		serializedPoint tmp;
+		readHelper(reinterpret_cast<char *>(&tmp), sizeof(serializedPoint));
+		points.push_back(tmp);
+	}
+
+	for(unsigned i = 0; i< M; ++i)
+	{
+		serializedQuadrilateral tmp;
+		readHelper(reinterpret_cast<char *>(&tmp), sizeof(serializedQuadrilateral));
+		elements.push_back(tmp);
+	}
+
+	forces.clear();
+}
+
+void LoadFile::loadCurrent()
+{
+	unsigned N;
+	readHelper(reinterpret_cast<char *>(&N), sizeof(unsigned));
+	unsigned M;
+	readHelper(reinterpret_cast<char *>(&M), sizeof(unsigned));
+
+	readHelper(reinterpret_cast<char *>(&forces), sizeof(concentratedForces));
 
 	for(unsigned i = 0; i< N; ++i)
 	{

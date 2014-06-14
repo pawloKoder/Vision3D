@@ -86,7 +86,7 @@ void PlotArea::paintGL()
 void PlotArea::clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.7, 0.7, 1.0, 1.0);
+	glClearColor(0.9, 0.9, 1.0, 1.0);
 }
 
 void PlotArea::computeView()
